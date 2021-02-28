@@ -1,7 +1,9 @@
 export default function Steps(){
     return(
-        <div>
-            
+        <div className="steps">
+            <form>
+                
+            </form>
         </div>
     )
 }
