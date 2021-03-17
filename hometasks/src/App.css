@@ -48,3 +48,8 @@ input, span {
 span {
   background-color: aliceblue;
 }
+
+form {
+  display: flex;
+  flex-direction: row;
+}
