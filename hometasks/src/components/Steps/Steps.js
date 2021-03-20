@@ -40,22 +40,29 @@ export default function Steps(){
                     <input type="submit" name="adding" id="adding" value="Ok" onClick={onSubmit}></input>
                 </label>
             </form>
-            <div className="output">
-                <div className="output-head">
-                    <span>Дата(ДД.ММ.ГГ)</span>
-                    <span>Пройдено км</span>
-                    <span>Действия</span>
-                </div>
-                {Object.entries(data).map((el) => {
-                    return (
-                        <div className="output-data">
-                            <h1>{el[0]}</h1>
-                            <h2>{el[1]}</h2>
-                            <button className="pen"><PencilIcon size={15}/></button>
-                            <button className="cross"><XCircleIcon size={16} /></button>
-                        </div>
-                    )
-                })}
+            <div>
+                <table className="output">
+                    <tr className="output-head">
+                        <th>Дата(ДД.ММ.ГГ)</th>
+                        <th>Пройдено км</th>
+                        <th>Действия</th>
+                    </tr>
+                    <tbody className="output-body">
+                        {Object.entries(data).map((el) => {
+                            return (
+                                <tr className="output-item">
+                                    <td>{el[0]}</td>
+                                    <td>{el[1]}</td>
+                                    <td className="output-item-buttons">
+                                        <button className="pen"><PencilIcon size={15}/></button>
+                                        <button className="cross"><XCircleIcon size={16}/></button>
+                                    </td>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
+
+                </table>
             </div>
         </div>
     )

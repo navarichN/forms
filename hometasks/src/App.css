@@ -54,9 +54,38 @@ form {
   flex-direction: row;
 }
 
-.output-data {
+
+.output {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+
+  
+}
+
+.output-head {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  padding: 20px;
+}
+
+.output-body {
+  border: 2px solid black;
+  border-radius: 20px;
+  width: 100%;
+  padding: 20px;
+}
+
+.output-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  margin: 10px;
 }
 
 .pen, .cross {
@@ -67,6 +96,16 @@ form {
   background-color: transparent;
   cursor: pointer;
   outline: none;
+}
+
+.output-item-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 50px;
+}
+
+.output-item-buttons button {
+  margin: 4px;
 }
 
 .pen:focus, .cross:focus {
