@@ -54,6 +54,9 @@ form {
   flex-direction: row;
 }
 
+.adding {
+  color: white;
+}
 
 .output {
   display: flex;
@@ -63,6 +66,22 @@ form {
   width: 500px;
 
   
+}
+
+td {
+  width: 30px;
+}
+
+.output-head {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  padding: 20px;
+}
+
+thead {
+  width: 100%;
 }
 
 .output-head {
