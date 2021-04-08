@@ -6,22 +6,80 @@ export default function Steps(){
     const [date, setDate] = useState('');
     const [dist, setDist] = useState(0);
 
-    const onSubmit = (e) => {
-        // setData(data[date] = dist)
-        if(data.hasOwnProperty(date)) {
-           console.log(data[date])
-           setData(data[date]+=dist)
+    const formatMonth = (value) => {
+            let m = value.getMonth()+1;
+            if(Number(m) <= 9) {
+                return `0${m}`
+            } else {
+                return m;
+            }
+    }
+
+    const formatDay = (value) => {
+        let d = value.getDate();
+        if(Number(d) <= 9) {
+            return `0${d}`
+        } else {
+            return d;
         }
+    }
 
-        setData(prev => ({
-            ...prev,
-            [date] : dist
-        }))
+    const formatDate = (d) => {
+        let date = new Date(d);
+        let day = formatDay(date);
+        let month = formatMonth(date);
+        let year = date.getFullYear();
+        let dateStr = `${day}.${month}.${year}`;
+        let arrDateData = [dateStr, year, month, day];
+        return arrDateData;
+    }
 
-            
-        console.log(data)
+    let dataArr = Object.entries(data).map((el) => {
+        let arr = el[0].split(',');
+        arr.push(el[1])
+        return arr;
+    })
+
+    let sortedDataArr = dataArr
+    .sort((a,b)=>{
+        return b[3]-a[3]; 
+    })
+    .sort((a,b)=>{
+        return b[2]-a[2]; 
+    })
+    .sort((a,b)=>{
+        return b[1]-a[1]; 
+    })
+
+    const onSubmit = (e) => {
+        if(data.hasOwnProperty(date)) {
+            setData(prev => ({
+                ...prev,
+                [date]: data[date] + dist
+            }))
+        } else {
+            setData(prev => ({
+                ...prev,
+                [date] : dist
+            }))
+        }    
         e.preventDefault();
     }
+    const editItem = (e) => {
+
+    }
+
+    const removeItem = (e) => {
+        console.log(e.target.parentNode.parentNode.parentNode.id)
+        let elId = e.target.parentNode.parentNode.parentNode.id
+        console.log('el:',elId)
+        console.log('data[`${el}`]:',data[elId])
+        // delete data[elId]
+        // sortedDataArr.filter((item) => {
+        //     return item 
+        // })
+    }
+
     let table = (
         <table className="output">
         <thead>
@@ -32,14 +90,17 @@ export default function Steps(){
             </tr>
         </thead>
         <tbody className="output-body">
-            {Object.entries(data).map((el) => {
+            {sortedDataArr.map((el, i) => {
+                let arr = el[0].split(',');
+                let arrId = el.filter((item) => typeof item !== "number")
+                let id = arrId.join()
                 return (
-                    <tr className="output-item">
-                        <td>{el[0]}</td>
-                        <td>{el[1]}</td>
+                    <tr className="output-item" key = {el+i} id = {id}>
+                        <td>{arr[0]}</td>
+                        <td>{el[4]}</td>
                         <td className="output-item-buttons">
-                            <button className="pen"><PencilIcon size={15}/></button>
-                            <button className="cross"><XCircleIcon size={16}/></button>
+                            <button className="pen" onClick={editItem}><PencilIcon size={20}/></button>
+                            <button className="cross" onClick={removeItem}><XCircleIcon size={20}/></button>
                         </td>
                     </tr>
                 )
@@ -53,7 +114,7 @@ export default function Steps(){
             <form className="form">
                 <label htmlFor="date">
                     Дата(ДД.ММ.ГГ)
-                    <input type="text" name="date" id="date" onChange={(e) => setDate(e.target.value)}></input>
+                    <input type="date" name="date" id="date" onChange={(e) => setDate(formatDate(e.target.value))}></input>
                 </label>
                 
                 <label htmlFor="distance">

@@ -120,10 +120,12 @@ thead {
 .output-item-buttons {
   display: flex;
   justify-content: space-between;
-  width: 50px;
+  width: 80px;
 }
 
 .output-item-buttons button {
+  width: 20px;
+  height: 20px;
   margin: 4px;
 }
 
