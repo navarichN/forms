@@ -65,19 +65,21 @@ export default function Steps(){
         }    
         e.preventDefault();
     }
+    
     const editItem = (e) => {
 
     }
 
     const removeItem = (e) => {
-        console.log(e.target.parentNode.parentNode.parentNode.id)
-        let elId = e.target.parentNode.parentNode.parentNode.id
-        console.log('el:',elId)
-        console.log('data[`${el}`]:',data[elId])
-        // delete data[elId]
-        // sortedDataArr.filter((item) => {
-        //     return item 
-        // })
+        e.stopPropagation()
+        let btn = e.currentTarget
+        let btns = btn.parentNode
+        let item = btns.parentNode
+        let itemId = item.id
+        delete data[itemId]
+        setData(prev => ({
+            ...prev
+        }))
     }
 
     let table = (
