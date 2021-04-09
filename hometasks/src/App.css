@@ -45,13 +45,32 @@ input {
   width: 200px;
 }
 
+input[type=submit], input[type=date]  {
+  cursor: pointer;
+}
+
+input:invalid {
+  border-color: red;
+  color: red;
+  box-shadow: none;
+}
+
 span {
   background-color: aliceblue;
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 form {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  width: 650px;
 }
 
 .adding {

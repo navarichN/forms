@@ -52,6 +52,7 @@ export default function Steps(){
     })
 
     const onSubmit = (e) => {
+        e.preventDefault();
         if(data.hasOwnProperty(date)) {
             setData(prev => ({
                 ...prev,
@@ -63,9 +64,8 @@ export default function Steps(){
                 [date] : dist
             }))
         }    
-        e.preventDefault();
     }
-    
+
     const editItem = (e) => {
 
     }
@@ -121,12 +121,30 @@ export default function Steps(){
                 
                 <label htmlFor="distance">
                     Пройдено км
-                    <input type="text" name="distance" id="distance" onChange={(e) => setDist(Number(e.target.value))}></input>
+                    <input type="text" name="distance" id="distance" pattern="[0-9]{1,100}" onChange={(e) => {
+                        setDist(Number(e.target.value))
+                        // let value = e.target.value;
+                        // if(isNaN(value)){
+                        //     document.getElementById("adding").disabled = true;
+                        //     alert('Введите число')
+                        // } else {
+                        //     setDist(Number(e.target.value))
+                        // }
+                        }}
+                    required>
+                    </input>
                 </label>
                 
                 <label className="adding" htmlFor="adding">
                     ''
-                    <input type="submit" name="adding" id="adding" value="Ok" onClick={onSubmit}></input>
+                    <input type="submit" name="adding" id="adding" value="Ok" onClick={(e)=>{
+                        if(isNaN(document.getElementById("distance").value)){
+                            alert('Введите число')
+                        } else {
+                            onSubmit(e)
+                        }
+                        
+                    }}></input>
                 </label>
             </form>
             <div>
